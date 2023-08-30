@@ -1,8 +1,9 @@
 from django.db import models
+from common.models import CommonModel
 
 
 # Create your models here.
-class Room(models.Model):
+class Room(CommonModel):
 
     """Room model definition"""
 
@@ -38,11 +39,9 @@ class Room(models.Model):
         on_delete=models.CASCADE,
     )
     amenities = models.ManyToManyField("rooms.Amenity")
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
 
 
-class Amenity(models.Model):
+class Amenity(CommonModel):
 
     """Amenity Definition"""
 
@@ -53,5 +52,3 @@ class Amenity(models.Model):
         max_length=150,
         default="",
     )
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
