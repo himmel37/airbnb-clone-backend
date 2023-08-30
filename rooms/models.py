@@ -2,7 +2,6 @@ from django.db import models
 from common.models import CommonModel
 
 
-# Create your models here.
 class Room(CommonModel):
 
     """Room model definition"""
@@ -19,6 +18,10 @@ class Room(CommonModel):
     city = models.CharField(
         max_length=80,
         default="서울",
+    )
+    name = models.CharField(
+        max_length=180,
+        default="",
     )
     price = models.PositiveIntegerField()
     rooms = models.PositiveIntegerField()
@@ -40,6 +43,9 @@ class Room(CommonModel):
     )
     amenities = models.ManyToManyField("rooms.Amenity")
 
+    def __str__(self):
+        return self.name
+
 
 class Amenity(CommonModel):
 
@@ -50,5 +56,12 @@ class Amenity(CommonModel):
     )
     description = models.CharField(
         max_length=150,
-        default="",
+        null=True,
+        blank=True,
     )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Amenities"
